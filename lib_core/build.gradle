@@ -1,0 +1,45 @@
+apply plugin: 'com.android.library'
+
+def ad = rootProject.ext.android
+def dep = rootProject.ext.dependencies
+
+android {
+    compileSdkVersion ad.compileSdkVersion
+    buildToolsVersion ad.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion ad.minSdkVersion
+        targetSdkVersion ad.targetSdkVersion
+        versionCode ad.versionCode
+        versionName ad.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+
+        //添加一条 boolean类型的变量
+        buildConfigField("boolean", "isModule", String.valueOf(isModule))
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation dep.appcompat
+    testImplementation dep.junit
+
+    api project(path: ':lib_annotation')
+
+}
