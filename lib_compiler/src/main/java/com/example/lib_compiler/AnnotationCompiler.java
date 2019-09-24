@@ -38,9 +38,6 @@ public class AnnotationCompiler extends AbstractProcessor {
         filer = processingEnv.getFiler();
     }
 
-    /**
-     *     声明返回要处理哪个注解
-     */
     @Override
     public Set<String> getSupportedAnnotationTypes() {
         Set<String> types = new HashSet<>();
@@ -48,55 +45,33 @@ public class AnnotationCompiler extends AbstractProcessor {
         return types;
     }
 
-    /**
-     * 持java版本
-     * @return
-     */
     @Override
     public SourceVersion getSupportedSourceVersion() {
         return processingEnv.getSourceVersion();
     }
 
 
-    /**
-     * 核心
-     */
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        /*
-        拿到该模块所有path注解的节点
-         */
         Set<? extends Element> elementsAnnotatedWith  = roundEnv.getElementsAnnotatedWith(Path.class);
 
-        /*
-         结构化数据
-          */
         Map<String, String> map = new HashMap<>();
         for (Element element : elementsAnnotatedWith) {
             TypeElement typeElement = (TypeElement) element;
             Path annotation = typeElement.getAnnotation(Path.class);
 
-            /*
-             读取值
-              */
             String key = annotation.path();
-            /*
-             包名+类名
-              */
             String activityName = typeElement.getQualifiedName().toString();
             map.put(key, activityName);
         }
 
         if (!map.isEmpty()) {
-            /*
-             写文件
-              */
             Writer writer = null;
-            String utilsName = "ActivityUtils";
+            String utilsName = "ARouterInjectUtils"+System.currentTimeMillis();
             try {
-                JavaFileObject javaFileObject = filer.createSourceFile("com.example.arouter_demo.utils." + utilsName);
+                JavaFileObject javaFileObject = filer.createSourceFile("com.example.utils." + utilsName);
                 writer = javaFileObject.openWriter();
-                writer.write("package com.example.arouter_demo.utils;\n" +
+                writer.write("package com.example.utils;\n" +
                         "\n"
                         + "import com.example.lib_core.ARouter;\n"
                         + "import com.example.lib_core.IRoute;\n"

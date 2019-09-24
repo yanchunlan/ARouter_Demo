@@ -43,7 +43,7 @@ public class ARouter {
         activityMap.put(path, clazz);
     }
 
-    public void jupmActivity(String path, Bundle bundle) {
+    public void jumpActivity(String path, Bundle bundle) {
         Class<? extends Activity> aClass = activityMap.get(path);
         if (aClass == null) {
             return;
@@ -61,7 +61,7 @@ public class ARouter {
     public void init(Application application) {
         this.context = application;
         try {
-            Set<String> className = ClassUtils.getFileNameByPackageName(context, "com.example.arouter_demo.utils");
+            Set<String> className = ClassUtils.getFileNameByPackageName(context, "com.example.utils");
             for (String name : className) {
                 Class<?> aClass = Class.forName(name);
                 //判断当前类是否是IRouter的实现类

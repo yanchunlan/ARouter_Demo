@@ -37,6 +37,6 @@ dependencies {
     implementation dep.appcompat
     testImplementation dep.junit
 
-    implementation project(path: ':lib_core')
+    api  project(path: ':lib_core')
 
 }

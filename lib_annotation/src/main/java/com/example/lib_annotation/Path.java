@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * date:  2019/09/24 13:51
  * desc:
  */
-@Target(ElementType.ANNOTATION_TYPE)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.CLASS)
 public @interface Path {
     String path();
