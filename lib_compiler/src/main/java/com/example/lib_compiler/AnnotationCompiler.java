@@ -36,6 +36,22 @@ public class AnnotationCompiler extends AbstractProcessor {
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
         filer = processingEnv.getFiler();
+
+        /*
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }*/
+       /* Map<String, String> options = processingEnv.getOptions();
+        if (!Utils.isEmpty(options)) {
+            moduleName = options.get(Constant.ARGUMENTS_NAME);
+        }
+        if (Utils.isEmpty(moduleName)) {
+            throw new RuntimeException("Not set processor moudleName option !");
+        }
+        log.i("init RouterProcessor " + moduleName + " success !");*/
+
     }
 
     @Override
