@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.lib_annotation.Path;
 import com.example.lib_core.ARouterCons;
 
-@Path(path = ARouterCons.module2_module2main)
+@Path({ARouterCons.module2_module2main,ARouterCons.module2_module22main})
 public class Module2Activity extends AppCompatActivity {
 
     @Override

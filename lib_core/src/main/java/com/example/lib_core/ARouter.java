@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.example.lib_core.utils.ClassUtils;
 
@@ -21,6 +22,8 @@ import java.util.Set;
  * desc:
  */
 public class ARouter {
+    private static final String TAG = "ARouter";
+
     private Map<String, Class<? extends Activity>> activityMap;
     private Context context;
 
@@ -61,8 +64,9 @@ public class ARouter {
     public void init(Application application) {
         this.context = application;
         try {
-            Set<String> className = ClassUtils.getFileNameByPackageName(context, "com.example.utils");
+            Set<String> className = ClassUtils.getFileNameByPackageName(context, ARouterCons.APT_PACKAGE_NAME);
             for (String name : className) {
+                Log.i(TAG, "init: name "+name);
                 Class<?> aClass = Class.forName(name);
                 //判断当前类是否是IRouter的实现类
                 if (IRoute.class.isAssignableFrom(aClass)) {
