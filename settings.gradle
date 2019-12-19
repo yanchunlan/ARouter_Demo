@@ -1,1 +1,11 @@
-include ':app', ':lib_core', ':module1', ':module2', ':lib_annotation', ':lib_compiler', ':base'
+// lib - router
+include ':lib_annotation', ':lib_compiler', ':lib_core'
+project(':lib_annotation').projectDir = new File("lib/router/lib_annotation")
+project(':lib_compiler').projectDir = new File("lib/router/lib_compiler")
+project(':lib_core').projectDir = new File("lib/router/lib_core")
+// sample
+include ':app', ':base', ':module1', ':module2'
+project(':app').projectDir = new File("Sample/app")
+project(':base').projectDir = new File("Sample/base")
+project(':module1').projectDir = new File("Sample/module1")
+project(':module2').projectDir = new File("Sample/module2")
